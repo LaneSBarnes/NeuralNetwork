@@ -9,7 +9,5 @@ namespace NeuralNetwork
 
         public float[] Weights { get; set; }
         public float Bias { get; set; }
-
-        public Layer PreviousLayer { get; set; }
     }
 }

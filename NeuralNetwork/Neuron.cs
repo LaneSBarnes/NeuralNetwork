@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NeuralNetwork
+﻿namespace NeuralNetwork
 {
     public class Neuron
     {
-        public float Activation { get; set; }
+        public double Activation { get; set; }
 
-        public float[] Weights { get; set; }
-        public float Bias { get; set; }
+        public double[] Weights { get; set; }
+        public double[] DCDW { get; set; }
+        public double Bias { get; set; }
+        public double DCDB { get; set; }
     }
 }

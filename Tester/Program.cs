@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NeuralNetwork;
 
 namespace Tester
@@ -7,21 +8,45 @@ namespace Tester
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var network = new Network(new int[] { 1, 1 });
 
-            var network = new Network(new int[] { 2, 3, 3, 2 });
+            List<(double[], double[])> examples = new List<(double[], double[])>();
+            for (int i = 0; i < 100; i++)
+            {
+                examples.AddRange(new List<(double[], double[])>()
+                {
+                    (new double[] { 1 }, new double[] { 1 }),
+                    (new double[] { 0 }, new double[] { 0 }),
+                });
+            }
 
-            float[] input = new float[] { 1.0F, 0.0F };
-            float[] output = network.Forward(input);
+            network.TrainExamples(examples.ToArray());
 
+            double[] input = new double[] { 1 };
+            double[] expectedOutput = new double[] { 1 };
+            double[] output = network.Forward(input);
+            double cost = network.Cost(output, expectedOutput);
+
+            string inputString = "";
+            foreach (var inputNeuron in input)
+            {
+                inputString += inputNeuron + ", ";
+            }
             string outputString = "";
             foreach (var outputNeuron in output)
             {
                 outputString += outputNeuron + ", ";
             }
+            string expectedOutputString = "";
+            foreach (var expectedOutputNeuron in expectedOutput)
+            {
+                expectedOutputString += expectedOutputNeuron + ", ";
+            }
 
+            Console.WriteLine("Input: " + inputString);
+            Console.WriteLine("ExpectedOutput: " + expectedOutputString);
             Console.WriteLine("Output: " + outputString);
-            Console.WriteLine("Cost: " + network.Cost(output, new float[] { 1, 0 }));
+            Console.WriteLine("Cost: " + cost);
 
             Console.ReadKey();
         }

@@ -8,10 +8,10 @@ namespace Tester
     {
         static void Main(string[] args)
         {
-            var network = new Network(new int[] { 1, 1 });
+            var network = new Network(new int[] { 1, 1, 1, 1});
 
             List<(double[], double[])> examples = new List<(double[], double[])>();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 examples.AddRange(new List<(double[], double[])>()
                 {
